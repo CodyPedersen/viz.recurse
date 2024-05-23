@@ -1,16 +1,23 @@
 """FIXME: add docstring"""
 import inspect
-
-from itertools import count
+import logging
 
 import networkx as nx
 import matplotlib.pyplot as plt
 
-G = nx.Graph()
-unique_id_counter = count(start=1)
+from networkx.drawing.nx_pydot import graphviz_layout
 
-def generate_execution_id():
-    return next(unique_id_counter)
+G = nx.Graph()
+
+
+def dump_frame_info(frame):
+    logging.info('\n\n')
+    logging.info(f"frame_addr: {hex(id(frame))}")
+    logging.info(f"frame: {repr(frame)}")
+    logging.info(f"frame.f_locals {frame.f_locals}", end='\n')
+    logging.info(f"dir(frame) {dir(frame)}", end='\n')
+    logging.info(f"frame.f_code.co_nam {frame.f_code.co_name}", end='\n')
+    logging.info(f"inspect.getframeinfo(frame): {inspect.getframeinfo(frame)}")
 
 
 def visualize(func):
@@ -20,58 +27,27 @@ def visualize(func):
         cur_frame = inspect.currentframe()
         prev_frame = cur_frame.f_back
 
-        print('\n\n')
-        print(hex(id(prev_frame)))
-        print(f"repr(prev_frame): {repr(prev_frame)}")
-        print(f"\n\nprev frame: {prev_frame}\n")
-        print(f"prev_frame.f_locals {prev_frame.f_locals}", end='\n')
-        print(f"dir(prev_fame) {dir(prev_frame)}", end='\n')
-        print(f"prev_frame.f_code.co_nam {prev_frame.f_code.co_name}", end='\n')
-        print(f"inspect.getframeinfo(prev_frame): {inspect.getframeinfo(prev_frame)}")
-
-        print('\n\n')
-        print(hex(id(cur_frame)))
-        print(f"repr(cur_frame): {repr(cur_frame)}")
-        print(f"cur frame {cur_frame}")
-        print(f"cur_frame.f_locals {cur_frame.f_locals}", end='\n')
-        print(f"dir(cur_frame) {dir(cur_frame)}", end='\n')
-        print(f"cur.f_code.co_nam {cur_frame.f_code.co_name}", end='\n')
-        print(f"inspect.getframeinfo(cur_frame): {inspect.getframeinfo(cur_frame)}")
-
-        cur_call_repr = f"{hex(id(cur_frame))}:{func.__name__}{args}"
-        G.add_node(f"{cur_call_repr}")
+        cur_addr = hex(id(cur_frame))
+        G.add_node(cur_addr, label=func.__name__+str(args))
 
         # if not coming from main context, build edge
         if prev_frame.f_locals.get('__name__') != '__main__':
+            prev_wrapped_frame = prev_frame.f_back
 
             # Construct arguments from previous stack frame
+            prev_wrapped_addr = hex(id(prev_wrapped_frame))
+            G.add_edge(prev_wrapped_addr, cur_addr)
 
-            prev_args = tuple(arg[1] for arg in prev_frame.f_locals.items())
-            print(f"prev_args: {prev_args}")
-
-            prev_call_repr = f"{hex(id(prev_frame))}:{prev_frame.f_code.co_name}{prev_args}"
-
-            G.add_edge(prev_call_repr, cur_call_repr)
-
-        out = func(*args, **kwargs)
-
-
-        return out
+        return func(*args, **kwargs)
 
     return inner
 
-def draw():
-    """FIXME: add docstring"""
-    nx.draw(
-        G,
-        with_labels=True,
-        node_color='skyblue',
-        node_size=700,
-        font_size=16,
-        font_color='black',
-        edge_color='gray'
-    )
-
+def draw(font_size=9, gv_layout="dot") -> None:
+    """Draw recursive tree/list from captured graph"""
+    pos = graphviz_layout(G, prog=gv_layout)
+    labels = {node: data['label'] for node, data in G.nodes(data=True)}
+    nx.draw_networkx_labels(G, pos, font_size=font_size, font_family='sans-serif', labels=labels)
+    nx.draw(G, pos)
     plt.show()
 
 

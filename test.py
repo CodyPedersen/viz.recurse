@@ -14,7 +14,7 @@ def toh(n, source, destination, auxiliary):
     toh(n-1, auxiliary, destination, source)
 
 # Driver code
-N = 3
+N = 5
 toh(N,'A','B','C')
 
 draw()

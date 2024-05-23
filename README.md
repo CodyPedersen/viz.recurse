@@ -1,3 +1,19 @@
+### Requirements
+Python 3.10.13, pip 23.0.1
+Graphviz `brew install graphviz`
+pip3 install -r requirements.txt
+
+If running into problems install pygraphviz:
+
+export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
+pip install pygraphviz \
+    --config-settings=--global-option=build_ext \
+    --config-settings=--global-option="-I$GRAPHVIZ_DIR/include" \
+    --config-settings=--global-option="-L$GRAPHVIZ_DIR/lib"
+###
+
+
+### A poem from our silicon friends
 In the realm of code where logic flows,
 A concept profound like a river that knows,
 There lies recursion, subtle and grand,
