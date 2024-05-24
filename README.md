@@ -4,7 +4,7 @@
 `brew install graphviz` (MacOS)\
 `pip3 install -r requirements.txt`
 
-If running into problems install pygraphviz:
+If running into problems installing pygraphviz:
 
 export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
 pip install pygraphviz \
