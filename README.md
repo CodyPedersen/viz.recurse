@@ -25,6 +25,7 @@ res = my_function(x=1,y=2)
 ### Examples
 ![Towers of Hanoi](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/toh.png?raw=true)
 ![Linear](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/linear.png?raw=true)
+![Fibonacci](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/fib.png?raw=true)
 
 ### Known issues
 Recursive calls are currently tracked (non-ideally) by use of two unique identifiers:
