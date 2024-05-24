@@ -1,4 +1,4 @@
-"""FIXME: add docstring"""
+"""Recursion visualization toolkit"""
 import inspect
 import logging
 
@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 
 from networkx.drawing.nx_pydot import graphviz_layout
 
-G = nx.Graph()
+G = nx.DiGraph()
 
 
-def dump_frame_info(frame):
+def __dump_frame_info(frame):
     logging.info('\n\n')
     logging.info(f"frame_addr: {hex(id(frame))}")
     logging.info(f"frame: {repr(frame)}")
@@ -21,8 +21,8 @@ def dump_frame_info(frame):
 
 
 def visualize(func):
-    """FIXME: add docstring"""
-    #calling_frame = inspect.currentframe()
+    """Decorator for visualization of recursive calls"""
+
     def inner(*args, **kwargs):
         cur_frame = inspect.currentframe()
         prev_frame = cur_frame.f_back
@@ -42,13 +42,35 @@ def visualize(func):
 
     return inner
 
-def draw(font_size=9, gv_layout="dot") -> None:
+def draw(font_size=8, gv_layout="dot", arrow_size=7, node_size=70) -> None:
     """Draw recursive tree/list from captured graph"""
     pos = graphviz_layout(G, prog=gv_layout)
     labels = {node: data['label'] for node, data in G.nodes(data=True)}
+
+    nx.draw_networkx_nodes(G, pos, node_size=node_size)
+    nx.draw_networkx_edges(G, pos, edgelist=G.edges(), arrowstyle='-|>', arrowsize=arrow_size)
     nx.draw_networkx_labels(G, pos, font_size=font_size, font_family='sans-serif', labels=labels)
-    nx.draw(G, pos)
+
+    #nx.draw(G, pos)
     plt.show()
+
+
+def graph_repr() -> dict:
+    """Returns a dict representation of the call graph"""
+
+    labels = {node: data['label'] for node, data in G.nodes(data=True)}
+
+    # Format nodes and edges to distinct variation
+    nodes = [f"{k}.{v}" for k,v in labels.items()]
+    edges = [
+        (f"{src}.{labels[src]}", f"{dst}.{labels[dst]}")
+        for src, dst in G.edges()
+    ]
+
+    return {
+        "nodes": nodes,
+        "edges": edges
+    }
 
 
 
