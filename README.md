@@ -1,5 +1,5 @@
 ### Requirements
-Python 3.10.13, pip 23.0.1
+Python 3.10.13 | pip 23.0.1
 Graphviz `brew install graphviz`
 pip3 install -r requirements.txt
 
@@ -7,10 +7,42 @@ If running into problems install pygraphviz:
 
 export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
 pip install pygraphviz \
-    --config-settings=--global-option=build_ext \
-    --config-settings=--global-option="-I$GRAPHVIZ_DIR/include" \
-    --config-settings=--global-option="-L$GRAPHVIZ_DIR/lib"
-###
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--config-settings=--global-option=build_ext \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--config-settings=--global-option="-I$GRAPHVIZ_DIR/include" \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--config-settings=--global-option="-L$GRAPHVIZ_DIR/lib"
+
+### Usage
+Attach `@visualize` decorator to the top of your recursive function and run as normal. e.g.
+```
+@visualize
+def my_function(*args, **kwargs): ...
+res = my_function(x=1,y=2)
+```
+### Known issues
+Recursive calls are currently tracked (non-ideally) by use of two unique identifiers:
+    - Wrapper stack memory address
+    - Function and function calls
+
+As a result, occasionally we can run into a case where a function with the same "apparent" identity
+is created in place of a prior one, leading to misjudged relationships. This will be remedied
+in time as we progress in development.
+
+### How it works (execution flow)
+
+  """"""""
+  @visualize
+  def some_function(args, kwargs): ...
+  """"""""
+  <__name__ = __main__ context> <-- [snapshot_1] prev on call stack
+  This calls visualize(func)  # no impact
+  visualize(func) his returns inner(*args, **kwargs)
+  inner(*args, **kwargs) is executed <-- [snapshot_1] cur on call stack, [snapshot_2] prev on call stack
+  this calls custom function `toh(*args)`
+  toh() calls visualize(func)
+  this returns inner(*args, **kwargs)
+  inner(*args, **kwargs) is executed <-- [snapshot_2] cur on call stack
+  ...
+
 
 
 ### A poem from our silicon friends

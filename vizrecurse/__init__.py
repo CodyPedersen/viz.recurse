@@ -1,14 +1,18 @@
 """Core visrecurse imports"""
+from .display import (
+    draw,
+    dump_graph,
+    graph_repr,
+)
 from .vizzy import (
     G,
-    draw,
-    graph_repr,
     visualize
 )
 
 __all__ = [
     "G",
     "draw",
+    "dump_graph",
     "graph_repr",
     "visualize"
 ]

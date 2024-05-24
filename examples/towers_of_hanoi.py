@@ -1,7 +1,16 @@
-"""Example usage for the visualization library"""
-import json
+# pylint: disable=wrong-import-position
+"""Example usage for the visualization library. Runnable as script"""
+import os
+import sys
 
-from vizrecurse import draw, visualize, graph_repr
+sys.path.append(os.path.dirname('..'))
+
+from vizrecurse import (
+    draw,
+    dump_graph,
+    graph_repr,
+    visualize
+)
 
 
 @visualize
@@ -15,23 +24,9 @@ def toh(n, source, destination, auxiliary):
     toh(n-1, auxiliary, destination, source)
 
 
-@visualize
-def linear_recurse(n):
-    """Visualization demo for simple recursion"""
-    if n <= 0:
-        return
-    print(n)
-    linear_recurse(n-1)
-
-
-# Driver code
-N = 5
-toh(N,'A','B','C')
-#linear_recurse(N)
+toh(5,'A','B','C')
 
 graph = graph_repr()
-
-with open('./graph.json', 'w') as f:
-    json.dump(graph, f)
-
+print(graph)
+dump_graph(fileloc='towers_of_hanoi.json')
 draw()
