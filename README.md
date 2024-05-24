@@ -1,7 +1,8 @@
 ### Requirements
-Python 3.10.13 | pip 23.0.1\
-`brew install graphviz` for MacOS\
-`pip3 install -r requirements.txt`\
+`Python 3.10.13`\
+`pip 23.0.1` (graphviz compatibility)\
+`brew install graphviz` (MacOS)\
+`pip3 install -r requirements.txt`
 
 If running into problems install pygraphviz:
 
@@ -29,7 +30,7 @@ Recursive calls are currently tracked (non-ideally) by use of two unique identif
 
 As a result, occasionally we can run into a case where a function with the same "apparent" identity
 is created in place of a prior one, leading to misjudged relationships. This will be remedied
-in time as we progress in development.
+in time as development (very slowly) continues.
 
 ### How it works (execution flow)
 
