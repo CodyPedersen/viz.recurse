@@ -18,10 +18,14 @@ Attach `@visualize` decorator to the top of your recursive function and run as n
 def my_function(*args, **kwargs): ...
 res = my_function(x=1,y=2)
 ```
+### Examples
+![Towers of Hanoi](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/toh.png?raw=true)
+![Linear](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/linear.png?raw=true)
+
 ### Known issues
 Recursive calls are currently tracked (non-ideally) by use of two unique identifiers:
-    - Wrapper stack memory address
-    - Function and function calls
+- Wrapper stack memory address
+- Function and function args
 
 As a result, occasionally we can run into a case where a function with the same "apparent" identity
 is created in place of a prior one, leading to misjudged relationships. This will be remedied
@@ -29,20 +33,20 @@ in time as we progress in development.
 
 ### How it works (execution flow)
 
-  """"""""
+  ```
   @visualize
-  def some_function(args, kwargs): ...
-  """"""""
-  <__name__ = __main__ context> <-- [snapshot_1] prev on call stack
+  def toh(args, kwargs): ...
+
+  <__name__ = __main__ context> # <-- [snapshot_1] prev on call stack
   This calls visualize(func)  # no impact
   visualize(func) his returns inner(*args, **kwargs)
-  inner(*args, **kwargs) is executed <-- [snapshot_1] cur on call stack, [snapshot_2] prev on call stack
-  this calls custom function `toh(*args)`
+  inner(*args, **kwargs) is executed # <-- [snapshot_1] cur on call stack, [snapshot_2] prev on call stack
+  this calls custom function `toh()`
   toh() calls visualize(func)
   this returns inner(*args, **kwargs)
-  inner(*args, **kwargs) is executed <-- [snapshot_2] cur on call stack
+  inner(*args, **kwargs) is executed # <-- [snapshot_2] cur on call stack
   ...
-
+  ```
 
 
 ### A poem from our silicon friends
