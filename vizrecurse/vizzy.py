@@ -11,13 +11,13 @@ G = nx.DiGraph()
 
 
 def __dump_frame_info(frame):
-    logging.info('\n\n')
-    logging.info(f"frame_addr: {hex(id(frame))}")
-    logging.info(f"frame: {repr(frame)}")
-    logging.info(f"frame.f_locals {frame.f_locals}", end='\n')
-    logging.info(f"dir(frame) {dir(frame)}", end='\n')
-    logging.info(f"frame.f_code.co_nam {frame.f_code.co_name}", end='\n')
-    logging.info(f"inspect.getframeinfo(frame): {inspect.getframeinfo(frame)}")
+    print('\n\n')
+    print(f"frame_addr: {hex(id(frame))}")
+    print(f"frame: {repr(frame)}")
+    print(f"frame.f_locals {frame.f_locals}", end='\n')
+    print(f"dir(frame) {dir(frame)}", end='\n')
+    print(f"frame.f_code.co_name {frame.f_code.co_name}", end='\n')
+    print(f"inspect.getframeinfo(frame): {inspect.getframeinfo(frame)}")
 
 
 def visualize(func):
@@ -27,20 +27,28 @@ def visualize(func):
         cur_frame = inspect.currentframe()
         prev_frame = cur_frame.f_back
 
+        # Build current node representation
         cur_addr = hex(id(cur_frame))
-        G.add_node(cur_addr, label=func.__name__+str(args))
+        label = func.__name__+str(args)
+        cur_repr = cur_addr + '.' + label
+        G.add_node(cur_repr, label=label)
+        print(G.nodes(data=True))
 
         # if not coming from main context, build edge
         if prev_frame.f_locals.get('__name__') != '__main__':
             prev_wrapped_frame = prev_frame.f_back
 
-            # Construct arguments from previous stack frame
+            # Construct representation from previous stack frame
             prev_wrapped_addr = hex(id(prev_wrapped_frame))
-            G.add_edge(prev_wrapped_addr, cur_addr)
+            prev_fn = prev_frame.f_code.co_name
+            prev_args = prev_wrapped_frame.f_locals['args']
+            prev_wrapped_repr = f"{prev_wrapped_addr}.{prev_fn}{prev_args}"
+            G.add_edge(prev_wrapped_repr, cur_repr)
 
         return func(*args, **kwargs)
 
     return inner
+
 
 def draw(font_size=8, gv_layout="dot", arrow_size=7, node_size=70) -> None:
     """Draw recursive tree/list from captured graph"""
