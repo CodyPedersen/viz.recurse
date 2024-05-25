@@ -37,12 +37,10 @@ def visualize(func: Callable[Param, RetType]) -> Callable[Param, RetType]:
         fn_timestamp = time.time_ns()
 
         cur_frame = inspect.currentframe()
-
         if not cur_frame:
             raise ValueError("Unable to infer existing frame.")
 
         prev_frame = cur_frame.f_back
-
         if not prev_frame:
             raise ValueError("Unable to infer previous frame.")
 
@@ -53,8 +51,8 @@ def visualize(func: Callable[Param, RetType]) -> Callable[Param, RetType]:
 
         # if not coming from main context, build edge
         if prev_frame.f_locals.get('__name__') != '__main__':
-            prev_wrapped_frame = prev_frame.f_back
 
+            prev_wrapped_frame = prev_frame.f_back
             if not prev_wrapped_frame:
                 raise ValueError("Wrapper frame not found. Validate frame context.")
 
