@@ -27,10 +27,7 @@ def graph_repr() -> dict:
 
     # Format nodes and edges to distinct variation
     nodes = [f"{k}.{v}" for k,v in labels.items()]
-    edges = [
-        (f"{src}.{labels[src]}", f"{dst}.{labels[dst]}")
-        for src, dst in G.edges()
-    ]
+    edges = [(src, dest) for src, dest in G.edges()]
 
     return {
         "nodes": nodes,

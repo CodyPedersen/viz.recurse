@@ -18,7 +18,6 @@ def visualize(func):
         label = func.__name__+str(args)
         cur_repr = cur_addr + '.' + label
         G.add_node(cur_repr, label=label)
-        print(G.nodes(data=True))
 
         # if not coming from main context, build edge
         if prev_frame.f_locals.get('__name__') != '__main__':

@@ -8,13 +8,13 @@ viz.recurse is a bare-bones library to easily visualize recursion without any si
 `pip3 install -r requirements.txt`
 
 If running into problems installing `pygraphviz`:
-
+```
 export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
 pip install pygraphviz \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--config-settings=--global-option=build_ext \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--config-settings=--global-option="-I$GRAPHVIZ_DIR/include" \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--config-settings=--global-option="-L$GRAPHVIZ_DIR/lib"
-
+  --config-settings=--global-option=build_ext \
+  --config-settings=--global-option="-I$GRAPHVIZ_DIR/include" \
+  --config-settings=--global-option="-L$GRAPHVIZ_DIR/lib"
+```
 ### Usage
 Attach `@visualize` decorator to the top of your recursive function and run as normal. e.g.
 ```
@@ -46,7 +46,7 @@ in time as development (very slowly) continues.
   This calls visualize(func)  # no impact
   visualize(func) his returns inner(*args, **kwargs)
   inner(*args, **kwargs) is executed # <-- [snapshot_1] cur on call stack, [snapshot_2] prev on call stack
-  this calls custom function `toh()`
+  this calls custom function toh()
   toh() calls visualize(func)
   this returns inner(*args, **kwargs)
   inner(*args, **kwargs) is executed # <-- [snapshot_2] cur on call stack
