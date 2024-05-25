@@ -1,5 +1,5 @@
-# pylint: disable=wrong-import-position
-"""Example usage for the visualization library. Runnable as script"""
+# pylint: disable=wrong-import-position, import-error
+"""Example usage for the visualization library. Runnable as script."""
 import os
 import sys
 
