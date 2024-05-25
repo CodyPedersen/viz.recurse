@@ -1,9 +1,10 @@
+# pylint: disable=invalid-name, import-error
 """Recursion visualization toolkit"""
 import inspect
 import time
 
 from types import FrameType
-from typing import Any, Callable, ParamSpec, TypeVar
+from typing import Callable, ParamSpec, TypeVar
 
 import networkx as nx
 

@@ -1,3 +1,4 @@
+# pylint: disable=import-error
 """Toolkit for outputing graph in multiple formats"""
 import json
 import networkx as nx
@@ -8,8 +9,14 @@ from networkx.drawing.nx_pydot import graphviz_layout
 from .vizzy import G
 
 
-def draw(font_size: int = 8, gv_layout: str = "dot", arrow_size: int = 7, node_size: int = 70) -> None:
+def draw(
+    font_size: int = 8,
+    gv_layout: str = "dot",
+    arrow_size: int = 7,
+    node_size: int = 70
+    ) -> None:
     """Draw recursive tree/list from captured graph"""
+
     pos = graphviz_layout(G, prog=gv_layout)
     labels = {node: data['label'] for node, data in G.nodes(data=True)}
 
