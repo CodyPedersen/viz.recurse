@@ -21,6 +21,7 @@ Attach `@visualize` decorator to the top of your recursive function and run as n
 @visualize
 def my_function(*args, **kwargs): ...
 res = my_function(x=1,y=2)
+draw()
 ```
 ### Examples
 ![Towers of Hanoi](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/toh.png?raw=true)
