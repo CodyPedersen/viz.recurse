@@ -8,8 +8,6 @@ from typing import Callable, ParamSpec, TypeVar
 
 import networkx as nx
 
-from .debug import dump_frame_info
-
 G = nx.DiGraph()
 
 Param = ParamSpec("Param")
