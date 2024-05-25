@@ -13,7 +13,7 @@ from vizrecurse import (
 )
 
 @visualize
-def fib(n):
+def fib(n: int) -> int:
     """Return nth fibonacci number"""
     if n <= 1:
         return n

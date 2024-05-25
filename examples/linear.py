@@ -13,7 +13,7 @@ from vizrecurse import (
 )
 
 @visualize
-def linear_recurse(n):
+def linear_recurse(n: int) -> None:
     """Visualization demo for simple recursion"""
     if n <= 0:
         return

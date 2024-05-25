@@ -14,7 +14,7 @@ from vizrecurse import (
 
 
 @visualize
-def toh(n, source, destination, auxiliary):
+def toh(n: int, source: str, destination: str, auxiliary: str) -> None:
     """Visualization demo for towers of hanoi"""
     if n==1:
         print ("Move disk 1 from source", source, "to destination", destination)

@@ -8,7 +8,7 @@ from networkx.drawing.nx_pydot import graphviz_layout
 from .vizzy import G
 
 
-def draw(font_size=8, gv_layout="dot", arrow_size=7, node_size=70) -> None:
+def draw(font_size: int = 8, gv_layout: str = "dot", arrow_size: int = 7, node_size: int = 70) -> None:
     """Draw recursive tree/list from captured graph"""
     pos = graphviz_layout(G, prog=gv_layout)
     labels = {node: data['label'] for node, data in G.nodes(data=True)}
@@ -20,12 +20,12 @@ def draw(font_size=8, gv_layout="dot", arrow_size=7, node_size=70) -> None:
     plt.show()
 
 
-def graph_repr() -> dict:
+def graph_repr() -> dict[str, list[dict[str,str|int]]] | list[list[str]]:
     """Returns a dict representation of the call graph"""
 
     # Format nodes and edges to distinct variation
     nodes = [data for _, data in G.nodes(data=True)]
-    edges = list(G.edges())
+    edges = list(G.edges()) #list of tuples
 
     return {
         "nodes": nodes,
@@ -33,7 +33,7 @@ def graph_repr() -> dict:
     }
 
 
-def dump_graph(fileloc='./graph.json') -> None:
+def dump_graph(fileloc: str ='./graph.json') -> None:
     """Dump graph callstack to a local file"""
     graph = graph_repr()
 
