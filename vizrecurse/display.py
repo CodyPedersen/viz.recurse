@@ -23,10 +23,8 @@ def draw(font_size=8, gv_layout="dot", arrow_size=7, node_size=70) -> None:
 def graph_repr() -> dict:
     """Returns a dict representation of the call graph"""
 
-    labels = {node: data['label'] for node, data in G.nodes(data=True)}
-
     # Format nodes and edges to distinct variation
-    nodes = [f"{k}" for k,_ in labels.items()]
+    nodes = [data for _, data in G.nodes(data=True)]
     edges = [(src, dest) for src, dest in G.edges()]
 
     return {
