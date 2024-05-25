@@ -10,7 +10,8 @@ from .vizzy import G
 
 
 def draw(
-    font_size: int = 8,
+    font_size: int = 6,
+    font_weight: str = "bold",
     gv_layout: str = "dot",
     arrow_size: int = 7,
     node_size: int = 70
@@ -22,7 +23,14 @@ def draw(
 
     nx.draw_networkx_nodes(G, pos, node_size=node_size)
     nx.draw_networkx_edges(G, pos, edgelist=G.edges(), arrowstyle='-|>', arrowsize=arrow_size)
-    nx.draw_networkx_labels(G, pos, font_size=font_size, font_family='sans-serif', labels=labels)
+    nx.draw_networkx_labels(
+        G,
+        pos,
+        font_size=font_size,
+        font_weight=font_weight,
+        font_family='sans-serif',
+        labels=labels,
+    )
 
     plt.show()
 

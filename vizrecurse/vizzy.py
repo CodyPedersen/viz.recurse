@@ -60,7 +60,7 @@ def visualize(func: Callable[Param, RetType]) -> Callable[Param, RetType]:
             prev_wrapped_fingerprint = generate_node_fingerprint(
                 prev_wrapped_frame,
                 prev_frame.f_code.co_name,
-                prev_wrapped_frame.f_locals['args'],
+                str(prev_wrapped_frame.f_locals['args']),
                 prev_wrapped_frame.f_locals['fn_timestamp']
             )
 
