@@ -1,5 +1,5 @@
 # pylint: disable=wrong-import-position, import-error
-"""Example: Linear regression. Runnable as script."""
+"""Example: Linear regression visualization. Runnable as script."""
 import os
 import sys
 

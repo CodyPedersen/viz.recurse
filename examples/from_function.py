@@ -1,5 +1,5 @@
 # pylint: disable=wrong-import-position, import-error
-"""Example: Fibonacci visualization. Runnable as script."""
+"""Example usage for the visualization library from a function. Runnable as script."""
 import os
 import sys
 
@@ -19,8 +19,11 @@ def fib(n: int) -> int:
         return n
     return fib(n-1) + fib(n-2)
 
+def my_fn() -> int:
+    """my fn"""
+    return fib(5)
 
-fib(8)
+my_fn()
 
 graph = graph_repr()
 print(graph)

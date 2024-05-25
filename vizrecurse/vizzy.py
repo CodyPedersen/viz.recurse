@@ -56,18 +56,21 @@ def visualize(func: Callable[Param, RetType]) -> Callable[Param, RetType]:
             if not prev_wrapped_frame:
                 raise ValueError("Wrapper frame not found. Validate frame context.")
 
-            # Construct representation from previous stack frame
-            prev_wrapped_fingerprint = generate_node_fingerprint(
-                prev_wrapped_frame,
-                prev_frame.f_code.co_name,
-                str(prev_wrapped_frame.f_locals['args']),
-                prev_wrapped_frame.f_locals['fn_timestamp']
-            )
+            # If in wrapper context, add edge
+            if prev_wrapped_frame.f_code.co_name == cur_frame.f_code.co_name:
 
-            G.add_edge(
-                prev_wrapped_fingerprint["node_for_adding"],
-                cur_fingerprint["node_for_adding"]
-            )
+                # Construct representation from previous stack frame
+                prev_wrapped_fingerprint = generate_node_fingerprint(
+                    prev_wrapped_frame,
+                    prev_frame.f_code.co_name,
+                    str(prev_wrapped_frame.f_locals['args']),
+                    prev_wrapped_frame.f_locals['fn_timestamp']
+                )
+
+                G.add_edge(
+                    prev_wrapped_fingerprint["node_for_adding"],
+                    cur_fingerprint["node_for_adding"]
+                )
 
         return func(*args, **kwargs)
 
