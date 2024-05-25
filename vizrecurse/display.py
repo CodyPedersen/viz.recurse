@@ -26,7 +26,7 @@ def graph_repr() -> dict:
     labels = {node: data['label'] for node, data in G.nodes(data=True)}
 
     # Format nodes and edges to distinct variation
-    nodes = [f"{k}.{v}" for k,v in labels.items()]
+    nodes = [f"{k}" for k,_ in labels.items()]
     edges = [(src, dest) for src, dest in G.edges()]
 
     return {
