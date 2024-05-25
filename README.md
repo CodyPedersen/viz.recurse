@@ -27,15 +27,6 @@ res = my_function(x=1,y=2)
 ![Linear](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/linear.png?raw=true)
 ![Fibonacci](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/fib.png?raw=true)
 
-### Known issues
-Recursive calls are currently tracked (non-ideally) by use of two unique identifiers:
-- Wrapper stack memory address
-- Function and function args
-
-As a result, occasionally we can run into a case where a function with the same "apparent" identity
-is created in place of a prior one, leading to misjudged relationships. This will be remedied
-in time as development (very slowly) continues.
-
 ### How it works (execution flow)
 
   ```
