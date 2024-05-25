@@ -24,6 +24,8 @@ res = my_function(x=1,y=2)
 draw()
 ```
 ### Examples
+Visit the examples folder to run these for yourself. Each is runnable as a standalone script within the context.
+
 ![Towers of Hanoi](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/toh.png?raw=true)
 ![Linear](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/linear.png?raw=true)
 ![Fibonacci](https://github.com/CodyPedersen/viz.recurse/blob/main/examples/images/fib.png?raw=true)
