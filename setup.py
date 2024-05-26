@@ -40,4 +40,3 @@ setup(
         "typing_extensions==4.12.0"
     ]
 )
-
