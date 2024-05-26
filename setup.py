@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 setup(
     name='vizrecurse',
-    version='1.1.0',
+    version='1.1.1',
     author='Cody Pedersen',
     description='Bare bones library to vizualize recursion with one line of code.',
     packages=find_packages(),
@@ -38,5 +38,6 @@ setup(
         "tomli==2.0.1",
         "tomlkit==0.12.5",
         "typing_extensions==4.12.0"
-    ]
+    ],
+    package_data={'vizrecurse': ['py.typed']},
 )
