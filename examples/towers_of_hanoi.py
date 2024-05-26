@@ -24,9 +24,9 @@ def toh(n: int, source: str, destination: str, auxiliary: str) -> None:
     toh(n-1, auxiliary, destination, source)
 
 
-toh(5,'A','B','C')
+toh(4,'A','B','C')
 
 graph = graph_repr()
 print(graph)
 dump_graph(fileloc='towers_of_hanoi.json')
-draw()
+draw(font_size=10)
