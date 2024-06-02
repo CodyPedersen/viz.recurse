@@ -29,6 +29,7 @@ def generate_node_fingerprint(
         "ts": ts
     }
 
+
 def visualize(func: Callable[Param, RetType]) -> Callable[Param, RetType]:
     """Decorator for visualization of recursive calls"""
 

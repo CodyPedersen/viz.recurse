@@ -1,10 +1,15 @@
 """PyPi vizrecurse setup"""
+from pathlib import Path
+
 from setuptools import setup, find_packages
+
 setup(
     name='vizrecurse',
-    version='1.1.1',
+    version='1.1.2',
     author='Cody Pedersen',
     description='Bare bones library to vizualize recursion with one line of code.',
+    long_description=(Path(__file__).parent/"README.md").read_text(),
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     classifiers=[
     'Programming Language :: Python :: 3.10',
@@ -13,6 +18,7 @@ setup(
     'Intended Audience :: Education'
     ],
     python_requires='>=3.10',
+    readme="README.md",
     install_requires=[
         "astroid==3.2.2",
         "contourpy==1.2.1",

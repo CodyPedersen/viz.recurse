@@ -1,8 +1,8 @@
 ### About viz.recurse
 viz.recurse is a bare-bones library to easily visualize recursion without any significant overhead on the part of the user. This library utilizes common graph and visualization libraries (networkx, matplotlib, pygraphviz).
 
-### Latest PyPi release [1.1.1]
-Visit https://pypi.org/project/vizrecurse/1.1.1/
+### Latest PyPi release [1.1.2]
+Visit https://pypi.org/project/vizrecurse/1.1.2/
 
 ### Requirements
 `Python 3.10.13`\
