@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='vizrecurse',
-    version='1.1.2',
+    version='1.1.3',
     author='Cody Pedersen',
     description='Bare bones library to vizualize recursion with one line of code.',
     long_description=(Path(__file__).parent/"README.md").read_text(),
