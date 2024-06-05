@@ -11,7 +11,7 @@ Visit https://pypi.org/project/vizrecurse/1.1.3/
 `pip3 install -r requirements.txt`
 
 If running into problems installing `pygraphviz`:
-```
+```bash
 export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
 pip install pygraphviz \
   --config-settings=--global-option=build_ext \
@@ -20,7 +20,7 @@ pip install pygraphviz \
 ```
 ### Usage
 Attach `@visualize` decorator to the top of your recursive function and run as normal. e.g.
-```
+```python
 @visualize
 def my_function(*args, **kwargs): ...
 res = my_function(x=1,y=2)
@@ -35,18 +35,22 @@ Visit the examples folder to run these for yourself. Each is runnable as a stand
 
 ### How it works (execution flow)
 
-  ```
+Example Function
+  ```python
   @visualize
   def toh(args, kwargs): ...
-
-  <__name__ = __main__ context> # <-- [snapshot_1] prev on call stack
-  This calls visualize(func)  # no impact
-  visualize(func) his returns inner(*args, **kwargs)
-  inner(*args, **kwargs) is executed # <-- [snapshot_1] cur on call stack, [snapshot_2] prev on call stack
-  this calls custom function toh()
-  toh() calls visualize(func)
-  this returns inner(*args, **kwargs)
-  inner(*args, **kwargs) is executed # <-- [snapshot_2] cur on call stack
+  ```
+  
+  Example call stack
+  ```
+  in module context # <-- [snapshot_1] prev on call stack
+  in visualize(func)  # no impact
+  in inner(*args, **kwargs)
+    inner(*args, **kwargs) is executed # <-- [snapshot_1] cur on call stack, [snapshot_2] prev on call stack
+  in toh()
+  in visualize(func)
+  in inner(*args, **kwargs)
+    inner(*args, **kwargs) is executed # <-- [snapshot_2] cur on call stack
   ...
   ```
 
