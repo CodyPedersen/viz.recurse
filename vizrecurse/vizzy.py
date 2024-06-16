@@ -47,7 +47,6 @@ def get_frame_set(
     """Capture current and prior frameset"""
 
     cur_frame = frame
-    print(f"seen frame args {frame.f_locals}")
 
     # unable to locate prior frame state
     if not frame or frame.f_code.co_name != 'debugged_func':  # remove hardcode
