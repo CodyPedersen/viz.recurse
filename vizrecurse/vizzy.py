@@ -1,6 +1,5 @@
-# pylint: disable=invalid-name, import-error
+# pylint: disable=unused-argument, invalid-name
 """Recursion visualization toolkit"""
-import inspect
 import sys
 import time
 
