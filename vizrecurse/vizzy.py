@@ -51,7 +51,7 @@ def get_frame_set(
     cur_frame = frame
 
     # unable to locate prior frame state
-    if not frame or frame.f_code.co_name != container:  # remove hardcode
+    if not frame or frame.f_code.co_name != container:
         return None, None
 
     # initialize to prior frame
@@ -60,7 +60,7 @@ def get_frame_set(
         return frame, None
 
     # locate last debug frame
-    while frame.f_code.co_name != container:  # remove hardcode
+    while frame.f_code.co_name != container:
         prior_frame = frame.f_back
 
         if not prior_frame or prior_frame.f_code.co_name == '<module>':
