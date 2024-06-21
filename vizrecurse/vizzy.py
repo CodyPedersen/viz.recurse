@@ -14,7 +14,7 @@ from typing import (
 )
 from typing_extensions import TypeAlias
 
-import networkx as nx
+import networkx as nx  # pylint:disable=import-error
 
 
 Param = ParamSpec("Param")
