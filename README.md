@@ -38,7 +38,7 @@ Visit the examples folder to run these for yourself. Each is runnable as a stand
 Example Function
   ```python
   @visualize
-  def toh(args, kwargs): ...
+  def toh(*args, **kwargs): ...
   ```
   
   Example call stack
